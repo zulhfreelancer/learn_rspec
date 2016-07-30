@@ -1,4 +1,5 @@
 class Contact < ActiveRecord::Base
+
   has_many :phones
   accepts_nested_attributes_for :phones
 
@@ -13,4 +14,5 @@ class Contact < ActiveRecord::Base
   def self.by_letter(letter)
     where("lastname LIKE ?", "#{letter}%").order(:lastname)
   end
+
 end
