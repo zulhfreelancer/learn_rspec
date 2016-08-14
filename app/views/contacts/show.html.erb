@@ -22,3 +22,5 @@
     <%= link_to 'Edit', edit_contact_path(@contact), class: 'btn btn-primary' %>
   </div>
 <% end %>
+
+<%= link_to 'Hide', hide_contact_path(@contact), class: 'btn btn-danger', method: :patch if !@contact.hidden? %>

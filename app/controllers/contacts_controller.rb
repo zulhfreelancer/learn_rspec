@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
   # before_action :authenticate, except: [:index, :show]
-  before_action :set_contact, only: [:show, :edit, :update, :destroy]
+  before_action :set_contact, only: [:show, :edit, :update, :destroy, :hide]
 
   # GET /contacts
   # GET /contacts.json
@@ -57,6 +57,12 @@ class ContactsController < ApplicationController
         format.json { render json: @contact.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  # PATCH /contacts/1/hide
+  def hide
+    @contact.hide
+    redirect_to @contact
   end
 
   # DELETE /contacts/1

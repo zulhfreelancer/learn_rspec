@@ -161,4 +161,25 @@ describe ContactsController do
 		end
 	end
 
+	# ==================================================
+	# non-CRUD methods
+	# ==================================================
+
+	describe "PATCH #hide" do
+		before :each do
+			@contact = create(:contact)
+		end
+
+		it "marks the contact as hidden" do
+			patch :hide, id: @contact
+			@contact.reload
+			expect(@contact.hidden?).to be_truthy
+		end
+
+		it "redirects to contacts#show" do
+			patch :hide, id: @contact
+			expect(response).to redirect_to @contact
+		end
+	end
+
 end

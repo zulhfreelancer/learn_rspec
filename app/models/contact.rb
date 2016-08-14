@@ -16,4 +16,8 @@ class Contact < ActiveRecord::Base
     where("lastname LIKE ?", "#{letter}%").order(:lastname)
   end
 
+  def hide
+    update_attributes(hidden: true)
+  end
+
 end
