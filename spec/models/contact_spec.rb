@@ -1,36 +1,41 @@
 require 'rails_helper'
 
 describe Contact do
+	it "has a valid factory" do
+		expect(build(:contact)).to be_valid
+	end
+
+	it "has three phone numbers" do
+		contact = create(:contact)
+		expect(contact.phones.count).to eq 3
+	end
+
 	it "is valid with a firstname, lastname and email" do
-		contact = Contact.new(
-								firstname: "Zulhilmi",
-								lastname: "Zainudin",
-								email: "zulh@hellogold.com"
-							 )
+		contact = create(:contact)
 		expect(contact).to be_valid
 	end
 	
 	it "is invalid without a firstname" do
-		contact = Contact.new(firstname: nil)
+		contact = build(:contact, firstname: nil)
 		contact.valid?
 		expect(contact.errors[:firstname]).to include("can't be blank")
 	end
 
 	it "is invalid without a lastname" do
-		contact = Contact.new(lastname: nil)
+		contact = build(:contact, lastname: nil)
 		contact.valid?
 		expect(contact.errors[:lastname]).to include("can't be blank")
 	end
 
 	it "is invalid without an email address" do
-		contact = Contact.new(email: nil)
+		contact = build(:contact, email: nil)
 		contact.valid?
 		expect(contact.errors[:email]).to include("can't be blank")
 	end
 
 	it "is invalid with a duplicate email address" do
-		Contact.create(firstname: "John", lastname: "Doe", email: "john@example.com")
-		contact = Contact.new(
+		create(:contact, email: "john@example.com")
+		contact = build(:contact,
 								firstname: "John",
 								lastname: "Doh",
 								email: "john@example.com"
@@ -40,7 +45,7 @@ describe Contact do
 	end
 
 	it "returns a contact's full name as a string" do
-		contact = Contact.new(
+		contact = build(:contact,
 								firstname: "John",
 								lastname: "Doe",
 								email: "john@example.com"
@@ -50,9 +55,9 @@ describe Contact do
 
 	describe "filter last name by letter" do
 		before :each do
-			@smith 	 = Contact.create(firstname: 'John', lastname: 'Smith', email: 'jsmith@example.com')
-			@jones 	 = Contact.create(firstname: 'Tim', lastname: 'Jones', email: 'tj@example.com')
-			@johnson = Contact.create(firstname: 'John', lastname: 'Johnson', email: 'jj@example.com')
+			@smith 	 = create(:contact, lastname: 'Smith')
+			@jones 	 = create(:contact, lastname: 'Jones')
+			@johnson = create(:contact, lastname: 'Johnson')
 		end
 
 		context "matching letters" do
