@@ -182,4 +182,22 @@ describe ContactsController do
 		end
 	end
 
+	# ==================================================
+	# non-HTML output methods
+	# ==================================================
+
+	describe "CSV output" do
+		it "returns a CSV file" do
+			get :index, format: :csv
+			expect(response.headers['Content-Type']).to match 'text/csv'
+		end
+
+		it "returns content" do
+			create(:contact, firstname: 'John', lastname: 'Doe', email: 'johndoe@example.com')
+			get :index, format: :csv
+			csv_array = response.body.split(',')
+			expect(csv_array).to include('John', 'Doe', 'johndoe@example.com')
+		end
+	end
+
 end

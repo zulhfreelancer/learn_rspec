@@ -1,5 +1,7 @@
 <h1>Contacts</h1>
 
+<%= link_to 'Export to CSV', contacts_path(format: :csv), class: 'btn btn-primary' %>
+
 <% if not @contacts.empty? %>
   <table class='table table-striped table-hover'>
     <thead>

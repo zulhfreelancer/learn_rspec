@@ -9,6 +9,14 @@ class ContactsController < ApplicationController
       @contacts = Contact.by_letter(params[:letter])
     else
       @contacts = Contact.order('lastname, firstname')
+
+      respond_to do |format|
+        format.html # index.html.erb
+        format.csv { 
+          response.headers['Content-Type'] = 'text/csv'
+          send_data @contacts.to_csv 
+        }
+      end
     end
   end
 
