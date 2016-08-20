@@ -27,6 +27,7 @@ class ContactsController < ApplicationController
 
   # GET /contacts/new
   def new
+    can_administer?
     @contact = Contact.new
     %w(home office mobile).each do |phone|
       @contact.phones.build(phone_type: phone)
@@ -40,6 +41,7 @@ class ContactsController < ApplicationController
   # POST /contacts
   # POST /contacts.json
   def create
+    redirect_to root_url, alert: 'Access denied.' and return unless administrator?
     @contact = Contact.new(contact_params)
 
     respond_to do |format|
