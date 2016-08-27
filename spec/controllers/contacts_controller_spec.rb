@@ -49,8 +49,7 @@ describe ContactsController do
 
 	shared_examples "full access to contacts" do
 		before :each do
-			user = create(:admin)
-			session[:user_id] = user.id
+			set_user_session(create(:admin))
 		end
 
 		describe "GET #new" do
