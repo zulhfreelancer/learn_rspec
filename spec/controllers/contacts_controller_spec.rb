@@ -2,50 +2,52 @@ require'rails_helper'
 
 describe ContactsController do
 
-	describe "GET #index" do
-		context "with params[:letter]" do
-			it "populates an array of contacts starting with the letter" do
-				smith = create(:contact, lastname: 'Smith')
-				jones = create(:contact, lastname: 'Jones')
-				get :index, letter: 'S'
-				expect(assigns(:contacts)).to match_array([smith])
+	shared_examples "public access to contacts" do
+		describe "GET #index" do
+			context "with params[:letter]" do
+				it "populates an array of contacts starting with the letter" do
+					smith = create(:contact, lastname: 'Smith')
+					jones = create(:contact, lastname: 'Jones')
+					get :index, letter: 'S'
+					expect(assigns(:contacts)).to match_array([smith])
+				end
+				it "renders the :index template" do
+					get :index, letter: 'S'
+					expect(response).to render_template :index
+				end
 			end
-			it "renders the :index template" do
-				get :index, letter: 'S'
-				expect(response).to render_template :index
+
+			context "without params[:letter]" do
+				it "populate an array of all contacts" do
+					smith = create(:contact, lastname: 'Smith')
+					jones = create(:contact, lastname: 'Jones')
+					get :index
+					expect(assigns(:contacts)).to match_array([smith, jones])
+				end
+				it "renders the :index template" do
+					get :index
+					expect(response).to render_template :index
+				end
 			end
 		end
 
-		context "without params[:letter]" do
-			it "populate an array of all contacts" do
-				smith = create(:contact, lastname: 'Smith')
-				jones = create(:contact, lastname: 'Jones')
-				get :index
-				expect(assigns(:contacts)).to match_array([smith, jones])
+		describe "GET #show" do
+			it "assigns the requested contact to @contact" do
+				contact = create(:contact)
+				get :show, id: contact
+
+				# variables instantiated by the controller method (@contact) can be evaluated using assigns(:contact)
+				expect(assigns(:contact)).to eq contact
 			end
-			it "renders the :index template" do
-				get :index
-				expect(response).to render_template :index
+			it "renders the :show template" do
+				contact = create(:contact)
+				get :show, id: contact
+				expect(response).to render_template :show
 			end
 		end
-	end
+	end # shared_examples
 
-	describe "GET #show" do
-		it "assigns the requested contact to @contact" do
-			contact = create(:contact)
-			get :show, id: contact
-
-			# variables instantiated by the controller method (@contact) can be evaluated using assigns(:contact)
-			expect(assigns(:contact)).to eq contact
-		end
-		it "renders the :show template" do
-			contact = create(:contact)
-			get :show, id: contact
-			expect(response).to render_template :show
-		end
-	end
-
-	describe "administrator access" do
+	shared_examples "full access to contacts" do
 		before :each do
 			user = create(:admin)
 			session[:user_id] = user.id
@@ -187,40 +189,22 @@ describe ContactsController do
 				expect(response).to redirect_to @contact
 			end
 		end
+	end # full access to contacts
+
+	describe "administrator access" do
+		it_behaves_like "public access to contacts"
+		it_behaves_like "full access to contacts"
 	end
 
 	describe "user access" do
-		before :each do
-			user = create(:user)
-			session[:user_id] = user.id
-		end
-
-		describe "GET #index" do
-			it "includes a contact in @contacts" do
-				contact = create(:contact)
-				get :index
-				expect(assigns(:contacts)).to match_array([contact])
-			end
-
-			it "renders the :index template" do
-				get :index
-				expect(response).to render_template :index
-			end
-		end
-
-		it "GET #new denies access" do
-			get :new
-			expect(response).to redirect_to root_url
-		end
-
-		it "POST #create denies access" do
-			post :create, contact: attributes_for(:contact)
-			expect(response).to redirect_to root_url
-		end
+		it_behaves_like "public access to contacts"
+		it_behaves_like "full access to contacts"
 	end
 
-	# redirect to login page
+	# + redirect to login page
 	describe "guest access" do
+		it_behaves_like "public access to contacts"
+
 		describe "GET #new" do
 			it "requires login" do
 				get :new
