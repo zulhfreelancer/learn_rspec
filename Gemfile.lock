@@ -40,6 +40,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-webkit (1.11.1)
+      capybara (>= 2.3.0, < 2.8.0)
+      json
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
     coffee-rails (4.0.1)
@@ -63,7 +66,7 @@ GEM
     ffi (1.9.14)
     hike (1.2.3)
     i18n (0.7.0)
-    jbuilder (2.5.0)
+    jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
     jquery-rails (3.1.4)
@@ -131,9 +134,8 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    selenium-webdriver (2.43.0)
+    selenium-webdriver (2.53.4)
       childprocess (~> 0.5)
-      multi_json (~> 1.0)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
     spring (1.7.2)
@@ -153,12 +155,12 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (5.0.0)
+    turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (3.0.0)
+    uglifier (3.0.2)
       execjs (>= 0.3.0, < 3)
     websocket (1.2.3)
     xpath (2.0.0)
@@ -172,6 +174,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.1.1)
   byebug
   capybara (~> 2.4.3)
+  capybara-webkit
   coffee-rails (~> 4.0.0)
   database_cleaner (~> 1.3.0)
   factory_girl_rails (~> 4.4.1)
@@ -183,7 +186,7 @@ DEPENDENCIES
   rspec-rails (~> 3.1.0)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
-  selenium-webdriver (~> 2.43.0)
+  selenium-webdriver (~> 2.53, >= 2.53.4)
   spring
   sqlite3
   turbolinks
