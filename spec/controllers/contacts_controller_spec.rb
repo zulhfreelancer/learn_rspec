@@ -89,7 +89,10 @@ describe ContactsController do
 					expect{
 						post :create, contact: attributes_for(:contact, phones_attributes: @phones)
 					}.to change(Contact, :count).by(1)
-				end	
+				end
+				it "return a full name as a string" do
+					expect(contact).to be_named('Lawrence Smith')
+				end
 				it "redirects to contacts#show" do
 					post :create, contact: attributes_for(:contact, phones_attributes: @phones)
 					expect(response).to redirect_to contact_path(assigns[:contact])
