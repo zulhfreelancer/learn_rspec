@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe Contact do
 	it "has a valid factory" do
+		skip "this is how to skip test"
 		expect(build(:contact)).to be_valid
 	end
 
