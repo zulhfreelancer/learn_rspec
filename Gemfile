@@ -48,6 +48,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'shoulda-matchers', '~> 3.1', '>= 3.1.1'
   gem "faker", "~> 1.4.3"
   gem "capybara", "~> 2.4.3"
   gem 'capybara-webkit'
