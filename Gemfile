@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.3.1'
 
 # http://stackoverflow.com/a/35893625/1577357
 gem 'rake', '< 11.0'
@@ -30,6 +31,8 @@ gem 'spring',        group: :development
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'figaro', '~> 1.1', '>= 1.1.1'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
@@ -57,5 +60,6 @@ group :test do
   gem "database_cleaner", "~> 1.3.0"
   gem "launchy", "~> 2.4.2"
   gem 'selenium-webdriver', '~> 2.53', '>= 2.53.4'
+  gem 'email_spec', '~> 2.1'
 end
 
