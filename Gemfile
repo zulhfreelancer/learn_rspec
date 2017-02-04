@@ -32,6 +32,7 @@ gem 'spring',        group: :development
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'figaro', '~> 1.1', '>= 1.1.1'
+gem 'carrierwave', '~> 1.0'
 
 # Use unicorn as the app server
 # gem 'unicorn'
@@ -55,11 +56,11 @@ end
 group :test do
   gem 'shoulda-matchers', '~> 3.1', '>= 3.1.1'
   gem "faker", "~> 1.4.3"
-  gem "capybara", "~> 2.4.3"
+  gem "capybara"
   gem 'capybara-webkit'
   gem "database_cleaner", "~> 1.3.0"
   gem "launchy", "~> 2.4.2"
-  gem 'selenium-webdriver', '~> 2.53', '>= 2.53.4'
+  gem 'selenium-webdriver'
   gem 'email_spec', '~> 2.1'
 end
 
