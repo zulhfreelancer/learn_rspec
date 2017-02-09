@@ -62,5 +62,6 @@ group :test do
   gem "launchy", "~> 2.4.2"
   gem 'selenium-webdriver'
   gem 'email_spec', '~> 2.1'
+  gem 'timecop', '~> 0.8.1'
 end
 
