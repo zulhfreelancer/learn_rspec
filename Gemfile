@@ -33,6 +33,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'carrierwave', '~> 1.0'
+gem 'httparty', '~> 0.14.0'
 
 # Use unicorn as the app server
 # gem 'unicorn'
@@ -63,5 +64,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'email_spec', '~> 2.1'
   gem 'timecop', '~> 0.8.1'
+  gem 'vcr', '~> 3.0', '>= 3.0.3'
+  gem 'webmock', '~> 2.3', '>= 2.3.2'
 end
 
