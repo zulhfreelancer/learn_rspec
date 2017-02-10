@@ -12,5 +12,11 @@ Rails.application.routes.draw do
   	resources :phones
   end
 
+  namespace :api do
+    namespace :v1 do
+      resources :contacts, only: [:show, :update]
+    end
+  end
+
   root 'contacts#index'
 end
