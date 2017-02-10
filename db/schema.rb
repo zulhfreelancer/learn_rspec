@@ -14,18 +14,18 @@
 ActiveRecord::Schema.define(version: 20170203205426) do
 
   create_table "contacts", force: :cascade do |t|
-    t.string   "firstname"
-    t.string   "lastname"
-    t.string   "email"
+    t.string   "firstname",  limit: 255
+    t.string   "lastname",   limit: 255
+    t.string   "email",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "hidden",     default: false
+    t.boolean  "hidden",                 default: false
   end
 
   create_table "phones", force: :cascade do |t|
     t.integer  "contact_id"
-    t.string   "phone"
-    t.string   "phone_type"
+    t.string   "phone",      limit: 255
+    t.string   "phone_type", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 20170203205426) do
   add_index "phones", ["contact_id"], name: "index_phones_on_contact_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "email"
-    t.string   "password_digest"
+    t.string   "email",           limit: 255
+    t.string   "password_digest", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin"

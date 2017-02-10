@@ -1,3 +1,9 @@
+<% if Date.today == Date.today.beginning_of_year %>
+  <p>Happy new year!</p>
+<% else %>
+  <p>Hello there!</p>
+<% end %>
+
 <h1>Contacts</h1>
 
 <%= link_to 'Export to CSV', contacts_path(format: :csv), class: 'btn btn-primary' %>
