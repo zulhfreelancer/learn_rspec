@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :news_releases
   get 'phones/show'
 
   get 'login', to: 'sessions#new', as: 'login'

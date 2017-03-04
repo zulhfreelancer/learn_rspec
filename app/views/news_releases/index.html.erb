@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+<h1>Listing News Releases</h1>
+<%= link_to "Add News Release", new_news_release_path, class: "btn btn-primary" %>
+
+<% @news_releases.each do |news_release| %>
+  <li>
+    <%= news_release.title_with_date %>
+  </li>  
+<% end %>
+
+<br>
+<%= link_to 'New News release', new_news_release_path %>

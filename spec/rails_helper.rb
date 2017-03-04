@@ -64,4 +64,17 @@ RSpec.configure do |config|
   config.include(EmailSpec::Matchers)
   config.include Capybara::DSL
 
+  # to only watch a specific spec using guard, add `focus: true`
+  # inside the `feature`, `content`, `scenario` or `it` block
+  # when it's done, remove the `focus: true`
+  # if it's not removed, all specs will be ignored when we press Enter key
+  # http://stackoverflow.com/a/14757823/1577357
+  config.filter_run :focus => true  
+  config.run_all_when_everything_filtered = true
+
+  # to solve `NoMethodError: undefined method `validate_presence_of'` error
+  # https://github.com/thoughtbot/shoulda-matchers/issues/951
+  config.include(Shoulda::Matchers::ActiveModel, type: :model)
+  config.include(Shoulda::Matchers::ActiveRecord, type: :model)
+
 end

@@ -10,10 +10,10 @@ describe User do
     end
 
     it "mocking external API service" do
-    	# VCR.use_cassette('stackoverflow') do
+    	VCR.use_cassette('stackoverflow') do
     		response = User.random
     		expect(response).to be_a(Fixnum)
-    	# end
+    	end
     end
 
 end
